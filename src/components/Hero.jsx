@@ -1,5 +1,7 @@
 "use client";
 
+import Link from "next/link"
+
 export default function Hero() {
   return (
     <section className="relative bg-white overflow-hidden">
@@ -15,9 +17,11 @@ export default function Hero() {
           analytics, and a sleek interface. Get started today and take control
           of your marketing!
         </p>
-        <button className="bg-teal-600 hover:bg-teal-700 text-white text-lg font-semibold px-8 py-3 rounded-full transition-shadow shadow-md hover:shadow-lg">
-          Get Started
-        </button>
+        <Link href="/create-segment">
+          <button className="bg-teal-600 hover:bg-teal-700 text-white text-lg font-semibold px-8 py-3 rounded-full transition-shadow shadow-md hover:shadow-lg">
+            Get Started
+          </button>
+        </Link>
       </div>
     </section>
   );

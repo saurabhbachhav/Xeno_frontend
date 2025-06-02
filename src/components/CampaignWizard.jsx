@@ -32,7 +32,9 @@ export default function CampaignWizard() {
 
   const fetchSegments = async () => {
     try {
-      const res = await fetch(`${API_BASE}/api/segments`);
+      const res = await fetch(
+        `https://xeno-backend-cfod.onrender.com/api/segments`
+      );
       const data = await res.json();
       if (res.ok) {
         setSegmentsList(data.segments || []);
@@ -48,11 +50,14 @@ export default function CampaignWizard() {
   const handlePreviewAudience = async () => {
     setLoadingPreview(true);
     try {
-      const res = await fetch(`${API_BASE}/api/segments/preview`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ rules: segmentRules }),
-      });
+      const res = await fetch(
+        `https://xeno-backend-cfod.onrender.com/api/segments/preview`,
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ rules: segmentRules }),
+        }
+      );
       const data = await res.json();
       if (res.ok) {
         setAudienceSize(data.audienceSize);
@@ -76,14 +81,17 @@ export default function CampaignWizard() {
     }
     setLoadingSegmentSave(true);
     try {
-      const res = await fetch(`${API_BASE}/api/segments`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          name: segmentName.trim(),
-          rules: segmentRules,
-        }),
-      });
+      const res = await fetch(
+        `https://xeno-backend-cfod.onrender.com/api/segments`,
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            name: segmentName.trim(),
+            rules: segmentRules,
+          }),
+        }
+      );
       const data = await res.json();
       if (res.ok) {
         const { segment } = data;
@@ -130,11 +138,14 @@ export default function CampaignWizard() {
   const fetchSuggestions = async () => {
     setLoadingAI(true);
     try {
-      const res = await fetch(`${API_BASE}/api/ai/suggest-messages`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ goal }),
-      });
+      const res = await fetch(
+        `https://xeno-backend-cfod.onrender.com/api/ai/suggest-messages`,
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ goal }),
+        }
+      );
       const data = await res.json();
       if (res.ok) {
         setSuggestions(data.messages || []);
@@ -152,11 +163,14 @@ export default function CampaignWizard() {
 
   const fetchImage = async () => {
     try {
-      const res = await fetch(`${API_BASE}/api/ai/suggest-image`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ goal }),
-      });
+      const res = await fetch(
+        `https://xeno-backend-cfod.onrender.com/api/ai/suggest-image`,
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ goal }),
+        }
+      );
       const data = await res.json();
       if (res.ok) {
         setImageUrl(data.url);
@@ -187,11 +201,14 @@ export default function CampaignWizard() {
         message: selectedMessage,
         imageUrl,
       };
-      const res = await fetch(`${API_BASE}/api/campaigns`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(payload),
-      });
+      const res = await fetch(
+        `https://xeno-backend-cfod.onrender.com/api/campaigns`,
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(payload),
+        }
+      );
       const data = await res.json();
       if (res.ok) {
         alert("Campaign created!");

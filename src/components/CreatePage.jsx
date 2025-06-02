@@ -9,7 +9,7 @@ export default function CreateCampaign() {
   const { data: session, status } = useSession();
   const router = useRouter();
   const API_BASE =
-    process.env.NEXT_PUBLIC_API_BASE_URL || "http://localhost:5000";
+  "https://xeno-backend-cfod.onrender.com/" || "http://localhost:5000";
 
   // Campaign state
   const [segmentsList, setSegmentsList] = useState([]);
@@ -24,7 +24,7 @@ export default function CreateCampaign() {
   // Redirect if not authenticated
   useEffect(() => {
     if (status === "unauthenticated") {
-      router.replace("/api/auth/signin");
+      router.replace("https://xeno-backend-cfod.onrender.com/api/auth/signin");
     }
   }, [status, router]);
 
@@ -37,11 +37,14 @@ export default function CreateCampaign() {
 
   const fetchSegments = async () => {
     try {
-      const res = await fetch(`${API_BASE}/api/segments`, {
-        headers: {
-          Authorization: `Bearer ${session.accessToken}`,
-        },
-      });
+      const res = await fetch(
+        `https://xeno-backend-cfod.onrender.com/api/segments`,
+        {
+          headers: {
+            Authorization: `Bearer ${session.accessToken}`,
+          },
+        }
+      );
       const data = await res.json();
       if (res.ok) {
         setSegmentsList(data.segments || []);
@@ -74,14 +77,17 @@ export default function CreateCampaign() {
   const fetchSuggestions = async () => {
     setLoadingAI(true);
     try {
-      const res = await fetch(`${API_BASE}/api/ai/suggest-messages`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${session.accessToken}`,
-        },
-        body: JSON.stringify({ goal }),
-      });
+      const res = await fetch(
+        `https://xeno-backend-cfod.onrender.com/api/ai/suggest-messages`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${session.accessToken}`,
+          },
+          body: JSON.stringify({ goal }),
+        }
+      );
       const data = await res.json();
       if (res.ok) {
         setSuggestions(data.messages || []);
@@ -136,14 +142,17 @@ export default function CreateCampaign() {
         segmentId: selectedSegmentId,
         message: selectedMessage,
       };
-      const res = await fetch(`${API_BASE}/api/campaigns`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${session.accessToken}`,
-        },
-        body: JSON.stringify(payload),
-      });
+      const res = await fetch(
+        `https://xeno-backend-cfod.onrender.com/api/campaigns`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${session.accessToken}`,
+          },
+          body: JSON.stringify(payload),
+        }
+      );
       const data = await res.json();
       if (res.ok) {
         alert("Campaign created!");

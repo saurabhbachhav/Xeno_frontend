@@ -31,11 +31,14 @@ export default function RuleBuilder({ onChange }) {
     setLoading(true);
     setAiSuccess(false); // 🆕 hide old success message
     try {
-      const res = await fetch("http://localhost:5000/api/nl-to-rule", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ prompt: prompt }),
-      });
+      const res = await fetch(
+        "https://xeno-backend-cfod.onrender.com/api/nl-to-rule",
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ prompt: prompt }),
+        }
+      );
 
       const data = await res.json();
 

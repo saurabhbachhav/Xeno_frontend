@@ -8,7 +8,7 @@ export default function CreateSegment() {
   const { data: session, status } = useSession();
   const router = useRouter();
   const API_BASE =
-    process.env.NEXT_PUBLIC_API_BASE_URL || "http://localhost:5000";
+  "https://xeno-backend-cfod.onrender.com/" || "http://localhost:5000";
 
   // Segment state
   const [segmentName, setSegmentName] = useState("");
@@ -20,7 +20,7 @@ export default function CreateSegment() {
   // Redirect if not authenticated
   useEffect(() => {
     if (status === "unauthenticated") {
-      router.replace("/api/auth/signin");
+      router.replace("https://xeno-backend-cfod.onrender.com/api/auth/signin");
     }
   }, [status, router]);
 
@@ -28,14 +28,17 @@ export default function CreateSegment() {
   const handlePreview = async () => {
     setLoadingPreview(true);
     try {
-      const res = await fetch(`${API_BASE}/api/segments/preview`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${session.accessToken}`,
-        },
-        body: JSON.stringify({ rules: segmentRules }),
-      });
+      const res = await fetch(
+        `https://xeno-backend-cfod.onrender.com/api/segments/preview`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${session.accessToken}`,
+          },
+          body: JSON.stringify({ rules: segmentRules }),
+        }
+      );
       const data = await res.json();
       if (res.ok) {
         setAudienceSize(data.audienceSize);
@@ -59,17 +62,20 @@ export default function CreateSegment() {
     }
     setLoadingSave(true);
     try {
-      const res = await fetch(`${API_BASE}/api/segments`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${session.accessToken}`,
-        },
-        body: JSON.stringify({
-          name: segmentName.trim(),
-          rules: segmentRules,
-        }),
-      });
+      const res = await fetch(
+        `https://xeno-backend-cfod.onrender.com/api/segments`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${session.accessToken}`,
+          },
+          body: JSON.stringify({
+            name: segmentName.trim(),
+            rules: segmentRules,
+          }),
+        }
+      );
       const data = await res.json();
       if (res.ok) {
         alert(`Segment "${data.segment.name}" saved!`);

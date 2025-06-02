@@ -10,7 +10,7 @@ function CampaignLogs({ campaignId }) {
     const fetchLogs = async () => {
       try {
         const res = await fetch(
-          `http://localhost:5000/api/campaigns/${campaignId}/logs`
+          `https://xeno-backend-cfod.onrender.com/api/campaigns/${campaignId}/logs`
         );
         const data = await res.json();
         setLogs(data);

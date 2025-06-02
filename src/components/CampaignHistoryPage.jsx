@@ -13,7 +13,9 @@ function CampaignCard({ campaign }) {
   useEffect(() => {
     // Only fetch stats if user is authenticated
     if (status === "authenticated") {
-      fetch(`http://localhost:5000/api/campaigns/${campaign._id}/stats`)
+      fetch(
+        `https://xeno-backend-cfod.onrender.com/api/campaigns/${campaign._id}/stats`
+      )
         .then((res) => res.json())
         .then(setStats)
         .catch((err) => {
@@ -129,7 +131,7 @@ export default function CampaignHistoryPage() {
   // Fetch campaigns after confirming the user is authenticated
   useEffect(() => {
     if (status === "authenticated") {
-      fetch("http://localhost:5000/api/campaigns")
+      fetch("https://xeno-backend-cfod.onrender.com/api/campaigns")
         .then((res) => res.json())
         .then((data) => {
           if (Array.isArray(data)) {
