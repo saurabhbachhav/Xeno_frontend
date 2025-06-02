@@ -135,7 +135,6 @@ export default function CreateCampaign() {
         name: campaignName.trim(),
         segmentId: selectedSegmentId,
         message: selectedMessage,
-        imageUrl,
       };
       const res = await fetch(`${API_BASE}/api/campaigns`, {
         method: "POST",
