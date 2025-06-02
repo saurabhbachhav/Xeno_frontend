@@ -1,3 +1,4 @@
+"use client";
 import CampaignCard from "@/components/CampaignCard"; // Ensure this is the styled version shared earlier
 
 const dummyCampaigns = [
