@@ -1,36 +1,39 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+✅ Local Setup Instructions
+# Go to frontend directory
+cd frontend
 
-## Getting Started
+# Install dependencies
+npm install
 
-First, run the development server:
-
-```bash
+# Run dev server
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Requirements:
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+Node.js ≥ 18
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Internet connection (for Hugging Face or OpenAI requests, if enabled)
 
-## Learn More
+🧭 Architecture
+graph TD
+  A[User Interface - Next.js + Tailwind] --> B[Campaign Creation Form]
+  B --> C[Rule Builder UI]
+  B --> D[AI Message Suggestion]
+  C --> E[API Call: /api/rules]
+  D --> F[Hugging Face API Call]
 
-To learn more about Next.js, take a look at the following resources:
+🤖 AI Tools & Tech Used (Frontend)
+Next.js – React framework with SSR and API support.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Tailwind CSS – Utility-first styling.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+Hugging Face Inference API (Flask model) – Generates promotional messages based on user-defined campaign goals.
 
-## Deploy on Vercel
+ShadCN UI (optional) – For UI components.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+⚠️ Known Limitations (Frontend)
+Only works in modern browsers.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Message suggestions rely on external inference API (may add latency).
+
+No offline mode.
